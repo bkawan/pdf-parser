@@ -1,0 +1,48 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, shrink-to-fit=no">
+    {% block master-meta %}
+    {% endblock %}
+    <link rel="icon" type="image/png" href="https://example.com/favicon.png">
+    <!-- Apple Touch Icon (at least 200x200px) -->
+    <link rel="apple-touch-icon" href="/custom-icon.png">
+    <!-- To run web application in full-screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Status Bar Style (see Supported Meta Tags below for available values) -->
+    <!-- Has no effect unless you have the previous meta tag -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-config" content="browserconfig.xml"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="canonical" href="{% block canonical %}{% endblock %}">
+    <link rel="stylesheet" href="{% static 'libs/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/fontawesome/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body>
+{% block master_header %}
+    {% include 'partials/_header.html' %}
+{% endblock %}
+{% block master_full_width_container %}
+{% endblock %}
+{% block master_content %}
+{% endblock %}
+{% block master_footer %}
+    {% include 'partials/_footer.html' %}
+{% endblock %}
+
+<script type="text/javascript" src="{% static "libs/jquery/jquery-3.3.1.js" %}"></script>
+<script type="text/javascript" src="{% static "libs/tether/dist/js/tether.js" %}">
+</script>
+<script type="text/javascript" src="{% static "libs/bootstrap/js/bootstrap.js" %}"></script>
+{% block js %}{% endblock %}
+
+</body>
+</html>

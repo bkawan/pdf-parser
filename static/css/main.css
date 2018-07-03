@@ -1,0 +1,293 @@
+/* Social Icon Color*/
+.facebook-color {
+    color: #3b5999;
+}
+
+.twitter-color {
+    color: #55acee;
+}
+
+.google-plus-color {
+    color: #dd4b39;
+}
+
+.youtube-color {
+    color: #cd201f;
+}
+
+.instagram-color {
+    color: #e4405f;
+}
+
+/* Social Icon on hover change color*/
+.fa-facebook:hover {
+    color: #3b5999 !important;
+}
+
+.fa-twitter:hover {
+    color: #55acee !important;
+}
+
+.fa-google-plus:hover {
+    color: #dd4b39 !important;
+}
+
+.fa-youtube:hover {
+    color: #cd201f !important;
+}
+
+.fa-instagram:hover {
+    color: #e4405f !important;
+}
+
+
+.font-36 {
+    font-size: 36px;
+}
+
+.font-20 {
+    font-size: 20px;
+}
+
+.bg-facebook {
+    background-color: #3b5999;
+}
+
+.bg-twitter {
+    background-color: #55acee;
+}
+
+.bg-google-plus {
+    background-color: #dd4b39;
+}
+
+.bg-youtube {
+    background-color: #cd201f;
+}
+
+.bg-instagram {
+    background-color: #e4405f;
+}
+
+.bg-facebook-light {
+    background-color: #516CAB;
+}
+
+.bg-twitter-light {
+    background-color: #64B5F6;
+}
+
+.bg-google-plus-light {
+    background-color: #FF5252;
+}
+
+.bg-instagram-light {
+    background-color: #B92E79;
+}
+
+.bg-youtube-light {
+    background-color: #E23929;
+}
+
+.no-border-radius {
+    border-radius: 0 0 0 0 !important;
+}
+
+.social-widget-links:hover {
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+button.bg-youtube:hover {
+    color: white !important;
+}
+
+button.bg-facebook:hover {
+    color: white !important;
+}
+
+button.bg-google-plus:hover {
+    color: white !important;
+}
+
+button.bg-twitter:hover {
+    color: white !important;
+}
+
+button.bg-instagram:hover {
+    color: white !important;
+}
+
+.no-underline:hover {
+    text-decoration: none;
+}
+
+.box-shadow {
+    border: none;
+    /*border-left: 2px solid green;*/
+    border-bottom: 2px solid green !important;
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+
+}
+
+.grad1 {
+    background: linear-gradient(-90deg, #cfffec, #fff4f7);
+    color: green;
+
+}
+
+.widget-header {
+    border-bottom: 2px solid #2e7d32 !important;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+}
+
+.widget-title {
+    padding: 5px;
+    margin: 0;
+    display: inline-block;
+    background-color: #2e7d32;
+    /*background: linear-gradient(-90deg, #2e7d32, #81c784);*/
+    color: white !important;
+}
+
+.img-h-250 {
+    height: 250px;
+}
+
+.img-h-400 {
+    height: 400px;
+}
+
+.img-w-750 {
+    width: 750px !important;
+}
+
+.author-img {
+    height: 100px !important;
+    width: 100px !important;
+}
+
+.author-social-share a {
+    border-radius: 0;
+    background-color: #bdbdbd;
+}
+
+.author-social-share a.facebook:hover {
+    background-color: #3b5999;
+    color: white
+}
+
+.author-social-share a.facebook {
+    color: #3b5999;
+}
+
+.author-social-share a.twitter:hover {
+    background-color: #55acee;
+    color: white
+}
+
+.author-social-share a.twitter {
+    color: #55acee;
+}
+
+.author-social-share a.google-plus:hover {
+    background-color: #dd4b39;
+    color: white
+}
+
+.author-social-share a.google-plus {
+    color: #dd4b39;
+}
+
+.author-social-share a.youtube:hover {
+    background-color: #cd201f;
+    color: white
+}
+
+.author-social-share a.youtube {
+    color: #cd201f;
+}
+
+.author-social-share a.instagram:hover {
+    background-color: #e4405f;
+    color: white
+}
+
+.author-social-share a.instagram {
+    color: #e4405f;
+}
+
+.author-social-share a > i:hover {
+    color: white !important;
+}
+
+.img-w-290 {
+    width: 290px;
+}
+
+.img-h-180 {
+    height: 180px;
+}
+
+.img-w-750 {
+    width: 750px;
+}
+
+.img-h-250 {
+    height: 250px;
+}
+
+.img-w-100 {
+    width: 100px;
+}
+
+.img-h-80 {
+    height: 80px;
+}
+
+.img-w-350 {
+    width: 350px;
+}
+
+.img-h-80 {
+    height: 80px;
+}
+
+.img-w-220 {
+    width: 220px;
+}
+
+.img-h-130 {
+    height: 130px;
+}
+
+.img-w-200 {
+    width: 200px;
+}
+
+.img-w-280 {
+    width: 280px;
+
+}
+
+.img-w-250 {
+    width: 250px;
+}
+
+.img-h-200 {
+    height: 200px;
+}
+
+.img-h-100 {
+    height: 100px;
+
+}
+
+.img-h-60 {
+    height: 60px;
+
+}
+

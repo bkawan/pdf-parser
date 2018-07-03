@@ -1,10 +1,12 @@
 {% extends '_base_master.html' %}
 
-
 {% block master_content %}
-    <div class="container" style="min-height: 600px">
-
-        Main Content for you page
+    <div class="container">
+        <div class="list-style">
+            {% for document in documents %}
+                <a class="list-group-item">{{ document.file.url }}</a>
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock %}

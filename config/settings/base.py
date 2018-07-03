@@ -48,6 +48,7 @@ LOCAL_APPS = [
     'apps.v1.core',
     'apps.v1.users',
     'apps.v1.media_library',
+    'apps.v1.document_parser',
 ]
 
 INSTALLED_APPS += THIRD_PARTY_APPS + LOCAL_APPS

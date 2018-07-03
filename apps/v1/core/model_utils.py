@@ -20,6 +20,22 @@ def image_upload_to(instance, filename):
     return path
 
 
+def file_upload_to(instance, filename):
+    """Store image in the directory of it's class name."""
+    class_name = instance.__class__.__name__
+    app_label = instance._meta.app_label
+    upload_to = f'uploads/file/{app_label}/{class_name}'
+    now = timezone.now()
+    filename, extension = os.path.splitext(filename)
+    path = os.path.join(upload_to,
+                        now.strftime('%Y'),
+                        now.strftime('%m'),
+                        now.strftime('%d'),
+                        '{}{}'.format(slugify(filename), extension))
+
+    return path
+
+
 def unique_slug_generator(instance, new_slug=None):
     """
     This is for a Django project and it assumes your instance

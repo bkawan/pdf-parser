@@ -5,7 +5,7 @@ from mptt.fields import TreeForeignKey
 from mptt.managers import TreeManager
 from mptt.models import MPTTModel
 
-from .model_utils import unique_slug_generator, image_upload_to
+from .model_utils import unique_slug_generator, image_upload_to, file_upload_to
 
 
 class AbstractCreatedAtModifiedAt(models.Model):
@@ -113,3 +113,15 @@ class AbstractCategory(MPTTModel, AbstractSlug):
 
     def __str__(self):
         return self.title
+
+
+class AbstractDocument(AbstractCreatedAtModifiedAt):
+    name = models.CharField(blank=True, null=True, max_length=255)
+    file = models.FileField(upload_to=file_upload_to, blank=True, null=True)
+    direct_link = models.URLField(blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return f'{self.name}-{self.file}'

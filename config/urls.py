@@ -18,8 +18,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from config import api
-from .api import urls as api_urls
 from .api import urls as api_urls
 
 urlpatterns = [
@@ -29,4 +27,4 @@ urlpatterns = [
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # urlpatterns += api_urls.urlpatterns
-urlpatterns += api.urls.urlpatterns
+urlpatterns += api_urls.urlpatterns

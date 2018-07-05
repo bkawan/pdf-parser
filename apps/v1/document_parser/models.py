@@ -17,6 +17,6 @@ class Document(AbstractSlug, AbstractDocument, models.Model):
         return self.file
 
     def save(self, *args, **kwargs):
-        if not self.pk and not self.name:
+        if not self.pk and not self.name or self.pk and not self.name:
             self.name = self.file.name
         super().save(*args, **kwargs)

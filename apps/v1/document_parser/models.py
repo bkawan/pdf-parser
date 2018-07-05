@@ -1,5 +1,8 @@
+from datetime import datetime, date
+
 from django.db import models
 
+from apps.v1.document_parser.king_county_pdf_parser import clean_king_county_pdf_file
 from ..core.abstract_models import AbstractDocument, AbstractSlug
 
 
@@ -17,6 +20,16 @@ class Document(AbstractSlug, AbstractDocument, models.Model):
         return self.file
 
     def save(self, *args, **kwargs):
-        if not self.pk and not self.name or self.pk and not self.name:
-            self.name = self.file.name
+        if not self.pk:
+            if not self.name:
+                self.name = self.file.name
         super().save(*args, **kwargs)
+        if not self.document_created_at:
+            file_path = self.file.path
+            data = clean_king_county_pdf_file(file_path, pages=[0,1])
+            case_status_date = data['case_status_date']
+            if not len(case_status_date.split(".")) == 3:
+                case_status_date += f'.{date.today().year}'
+            datetime_object = datetime.strptime(case_status_date, '%m.%d.%Y')
+            self.document_created_at = datetime_object
+            self.save()

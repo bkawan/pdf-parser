@@ -4,12 +4,14 @@
         <div class="row">
             <div class="col-md-6">
                 <a class="d-inline-block py-1" href="/">
+                    {% comment %}
                     <img src="{% static 'images/logo/company-logo.png' %}"
                          width="84"
                          height="84"
                          class="d-inline-block pr-2"
                          alt="{{ company_detail.name }}">
-                    <span class="h1 navbar-brand-name green">{{ company_detail.name }}</span>
+                         {% endcomment %}
+                    <span class="h1 navbar-brand-name green">{{ company_detail.name|default:"PDF PARSER" }}</span>
                 </a>
 
             </div>

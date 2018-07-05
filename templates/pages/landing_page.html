@@ -2,11 +2,32 @@
 
 {% block master_content %}
     <div class="container">
-        <div class="list-style">
-            {% for document in documents %}
-                <a class="list-group-item">{{ document.file.url }}</a>
-            {% endfor %}
-        </div>
+        {% for document in documents %}
+            <table class="table table-striped">
+                {% if forloop.counter == 1 %}
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">File Name</th>
+                        <th scope="col">File Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                {% endif %}
+                <tbody>
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ document.name }}</td>
+                    <td>{{ document.created_at }}</td>
+                    <td>
+                        <a href="" class="btn btn-sm btn-success">Detail</a>
+                        <a href="" class="btn btn-sm btn-success">Export</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        {% endfor %}
     </div>
 
 {% endblock %}

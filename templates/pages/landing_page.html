@@ -1,33 +1,79 @@
 {% extends '_base_master.html' %}
 
 {% block master_content %}
-    <div class="container">
-        {% for document in documents %}
-            <table class="table table-striped">
-                {% if forloop.counter == 1 %}
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">File Name</th>
-                        <th scope="col">File Date</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                    </thead>
-                {% endif %}
-                <tbody>
-                <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ document.name }}</td>
-                    <td>{{ document.created_at }}</td>
-                    <td>
-                        <a href="" class="btn btn-sm btn-success">Detail</a>
-                        <a href="" class="btn btn-sm btn-success">Export</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
 
-        {% endfor %}
-    </div>
+<div class="container" id="app">
+
+
+    {% for document in documents %}
+
+    <!--[[getValue('ksdf')]]-->
+    <table class="table table-striped">
+        {% if forloop.counter == 1 %}
+        <thead>
+        <tr>
+            <th scope="col" style="width: 3%">#</th>
+            <th scope="col" style="width: 60%">File Name</th>
+            <th scope="col" style="width: 15%">File Date</th>
+            <th scope="col" style="width: 15%">Action</th>
+        </tr>
+        </thead>
+        {% endif %}
+        <tbody>
+        <tr>
+            <th scope="row" style="width: 3%">{{ forloop.counter }}</th>
+            <td style="width: 60%">{{ document.name }}</td>
+            <td style="width: 15%" class="small">{{ document.created_at }}</td>
+            <td style="width:15%;">
+                <button class="btn btn-sm btn-success"
+                        @click.prevent="getKingCountyConvertedData('{{ document.slug }}')">Detail
+                </button>
+                <a class="btn btn-sm btn-success">Export</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    Vue.config.devtools = true;
+
+
+    var app = new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data: {
+            hello: 'hi',
+            allCaseList: {},
+            caseList: [],
+            caseStatusDate: '',
+        },
+        methods: {
+            getKingCountyConvertedData(slug) {
+                let that = this;
+                alert('hello')
+                let apiUrl = '/api/v1/document-parser/document/' + slug + "/";
+                axios.get(apiUrl).then(function (response) {
+                    that.$set(that.allCaseList, slug, {
+                        caseList: response.data.data.case_list,
+                        caseStatusDate: response.data.data.case_status_date
+                    })
+                    that.caseList = response.data.data.case_list;
+                    that.caseStatusDate = response.data.data.case_status_date;
+
+                }).catch(function (error) {
+                    console.log(error)
+
+                })
+
+            },
+
+        },
+    })
+</script>
 
 {% endblock %}

@@ -17,3 +17,5 @@ class KingCountyPdfParseAPIView(APIView):
         data['case_status_date'] = document.document_created_at.strftime('%m/%d/%Y')
 
         return Response({'data':data})
+
+

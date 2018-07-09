@@ -1,6 +1,7 @@
 from datetime import datetime, date
 
 from django.db import models
+from django.urls import reverse
 
 from apps.v1.document_parser.king_county_pdf_parser import clean_king_county_pdf_file
 from ..core.abstract_models import AbstractDocument, AbstractSlug
@@ -26,10 +27,13 @@ class Document(AbstractSlug, AbstractDocument, models.Model):
         super().save(*args, **kwargs)
         if not self.document_created_at:
             file_path = self.file.path
-            data = clean_king_county_pdf_file(file_path, pages=[0,1])
+            data = clean_king_county_pdf_file(file_path, pages=[0, 1])
             case_status_date = data['case_status_date']
             if not len(case_status_date.split(".")) == 3:
                 case_status_date += f'.{date.today().year}'
             datetime_object = datetime.strptime(case_status_date, '%m.%d.%Y')
             self.document_created_at = datetime_object
             self.save()
+
+    def export_to_csv(self):
+        return reverse('document_parser:export_to_csv', kwargs={"slug":self.slug})

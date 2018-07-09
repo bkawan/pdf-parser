@@ -22,6 +22,7 @@ from .api import urls as api_urls
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
+                  path('document-parser/', include('apps.v1.document_parser.urls')),
                   path('', include('apps.v1.core.urls')),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

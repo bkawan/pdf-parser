@@ -14,5 +14,6 @@ class KingCountyPdfParseAPIView(APIView):
         document = get_object_or_404(Document, slug=kwargs.get('slug'))
         document_path = document.file.path
         data = clean_king_county_pdf_file(file_path=document_path)
+        data['case_status_date'] = document.document_created_at.strftime('%m/%d/%Y')
 
         return Response({'data':data})

@@ -2,78 +2,93 @@
 
 {% block master_content %}
 
-<div class="container" id="app">
+    <div class="container" id="app">
 
 
-    {% for document in documents %}
+        {% for document in documents %}
 
-    <!--[[getValue('ksdf')]]-->
-    <table class="table table-striped">
-        {% if forloop.counter == 1 %}
-        <thead>
-        <tr>
-            <th scope="col" style="width: 3%">#</th>
-            <th scope="col" style="width: 60%">File Name</th>
-            <th scope="col" style="width: 15%">File Date</th>
-            <th scope="col" style="width: 15%">Action</th>
-        </tr>
-        </thead>
-        {% endif %}
-        <tbody>
-        <tr>
-            <th scope="row" style="width: 3%">{{ forloop.counter }}</th>
-            <td style="width: 60%">{{ document.name }}</td>
-            <td style="width: 15%" class="small">{{ document.created_at }}</td>
-            <td style="width:15%;">
-                <button class="btn btn-sm btn-success"
-                        @click.prevent="getKingCountyConvertedData('{{ document.slug }}')">Detail
-                </button>
-                <a class="btn btn-sm btn-success">Export</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    {% endfor %}
-</div>
+            <!--[[getValue('ksdf')]]-->
+            <table class="table table-striped">
+                {% if forloop.counter == 1 %}
+                    <thead>
+                    <tr>
+                        <th scope="col" style="width: 3%">#</th>
+                        <th scope="col" style="width: 60%">File Name</th>
+                        <th scope="col" style="width: 15%">File Date</th>
+                        <th scope="col" style="width: 15%">Action</th>
+                    </tr>
+                    </thead>
+                {% endif %}
+                <tbody>
+                <tr>
+                    <th scope="row" style="width: 3%">{{ forloop.counter }}</th>
+                    <td style="width: 60%">{{ document.name }}</td>
+                    <td style="width: 15%" class="small">{{ document.created_at }}</td>
+                    <td style="width:15%;">
+                        <button class="btn btn-sm btn-success show-detail"
+                                data-slug="{{ document.slug }}">
+                            Detail
+                        </button>
+                        <a class="btn btn-sm btn-success">Export</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="table table-striped no-display" id="{{ document.slug }}">
+                <thead>
+                <tr>
+                    <th scope="col">Case Number</th>
+                    <th scope="col">Case Type</th>
+                    <th scope="col">File Date</th>
+                    <th scope="col">Case Status Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        {% endfor %}
+    </div>
 
 {% endblock %}
 
 {% block js %}
-<script>
-    Vue.config.devtools = true;
+    <script>
+        $(function () {
+            $('.show-detail').on('click', function (event) {
+                event.preventDefault();
+                let slug = $(this).attr('data-slug');
+                let apiUrl = `/api/v1/document-parser/document/${slug}/`;
+                let table = $(`#${slug}`);
+                let button = $(this);
+                if (table.hasClass('no-display')) {
+                    $.ajax({
+                        url: apiUrl,
+                        success: function (data) {
+                            let caseList = data.data.case_list;
+                            let caseStatusDate = data.data.case_status_date;
+                            table.removeClass('no-display');
+                            {#                            button.attr('disabled', true);#}
+                            let tbody = table.children('tbody')
+                            for (let i = 0; i < caseList.length; i++) {
+                                let caseNumber = caseList[i].case_number;
+                                let caseType = caseList[i].case_type;
+                                let fileDate = caseList[i].file_date;
+                                let tr = tbody.append('<tr></tr>');
+                                tr.append(`<td>${caseNumber}</td>`);
+                                tr.append(`<td>${caseType}</td>`);
+                                tr.append(`<td>${fileDate}</td>`);
+                                tr.append(`<td>${caseStatusDate}</td>`);
+                            }
+                        }
 
-
-    var app = new Vue({
-        el: '#app',
-        delimiters: ['[[', ']]'],
-        data: {
-            hello: 'hi',
-            allCaseList: {},
-            caseList: [],
-            caseStatusDate: '',
-        },
-        methods: {
-            getKingCountyConvertedData(slug) {
-                let that = this;
-                alert('hello')
-                let apiUrl = '/api/v1/document-parser/document/' + slug + "/";
-                axios.get(apiUrl).then(function (response) {
-                    that.$set(that.allCaseList, slug, {
-                        caseList: response.data.data.case_list,
-                        caseStatusDate: response.data.data.case_status_date
                     })
-                    that.caseList = response.data.data.case_list;
-                    that.caseStatusDate = response.data.data.case_status_date;
+                } else {
+                    table.toggle()
+                }
+            })
 
-                }).catch(function (error) {
-                    console.log(error)
 
-                })
+        });
 
-            },
-
-        },
-    })
-</script>
-
+    </script>
 {% endblock %}

@@ -109,3 +109,6 @@ venv.bak/
 requirements-docs
 jupyter-notebook
 
+templates/pages/landing_page_vue.html
+
+.DS_Store

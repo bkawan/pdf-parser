@@ -9,5 +9,5 @@ class UserAdmin(admin.ModelAdmin):
     exclude = ('groups', 'user_permissions')
 
 
-admin.site.register(User, UserAdmin)
+# admin.site.register(User, UserAdmin)
 admin.site.unregister(Group)

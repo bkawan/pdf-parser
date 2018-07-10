@@ -18,12 +18,9 @@ class Document(AbstractSlug, AbstractDocument, models.Model):
 
     @property
     def slug_field(self):
-        return self.file
+        return self.file.name
 
     def save(self, *args, **kwargs):
-        if not self.pk:
-            if not self.name:
-                self.name = self.file.name
         super().save(*args, **kwargs)
         if not self.document_created_at:
             file_path = self.file.path

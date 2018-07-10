@@ -1,3 +1,6 @@
+import os
+import uuid
+
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -5,7 +8,7 @@ from mptt.fields import TreeForeignKey
 from mptt.managers import TreeManager
 from mptt.models import MPTTModel
 
-from .model_utils import unique_slug_generator, image_upload_to, file_upload_to
+from .model_utils import image_upload_to, file_upload_to
 
 
 class AbstractCreatedAtModifiedAt(models.Model):
@@ -53,9 +56,9 @@ class AbstractSlug(models.Model):
 
     def save(self, *args, **kwargs):
         if self.slug_field != self.__original_name:
-            self.slug = unique_slug_generator(self)
+            self.slug = self.unique_slug_generator(self)
         elif not self.slug:
-            self.slug = unique_slug_generator(self)
+            self.slug = self.unique_slug_generator(self)
         super().save(*args, **kwargs)
         self.__original_name = self.slug_field
 
@@ -74,9 +77,9 @@ class AbstractSlug(models.Model):
         if qs_exists:
             new_slug = "{slug}-{id}".format(
                 slug=slug,
-                id=instance.pk
+                id=instance.pk if instance.pk else  uuid.uuid4().hex[:6].upper()
             )
-            return unique_slug_generator(instance, new_slug=new_slug)
+            return self.unique_slug_generator(instance, new_slug=new_slug)
         return slug
 
 
@@ -122,6 +125,11 @@ class AbstractDocument(AbstractCreatedAtModifiedAt):
 
     class Meta:
         abstract = True
+
+    def save(self, *args, **kwargs):
+        if not self.name:
+            self.name, ext = os.path.splitext(self.file.name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.name}-{self.file}'

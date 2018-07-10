@@ -16,3 +16,6 @@ MIDDLEWARE += [
 
 ]
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+ADMIN_SITE_HEADER = 'PDF Parser Administration'
+ADMIN_SITE_TITLE = 'PDF Parser Administration'
+ADMIN_SITE_INDEX_TITLE = 'Welcome to PDF parser'

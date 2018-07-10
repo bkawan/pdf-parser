@@ -1,7 +1,9 @@
+import os
+
 DEBUG = True
 import dj_database_url
 
-from .base import DATABASES, MIDDLEWARE
+from .base import DATABASES, MIDDLEWARE, BASE_DIR
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
@@ -13,3 +15,4 @@ MIDDLEWARE += [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')

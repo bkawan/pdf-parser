@@ -1,10 +1,11 @@
 # Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 
 from ..document_parser.models import Document
 
 
-class LandingPageView(TemplateView):
+class LandingPageView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/landing_page.html'
 
     def get_context_data(self, **kwargs):

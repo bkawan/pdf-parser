@@ -2,6 +2,7 @@
 
 import csv
 
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 
@@ -9,6 +10,7 @@ from ..document_parser.king_county_pdf_parser import clean_king_county_pdf_file
 from ..document_parser.models import Document
 
 
+@login_required
 def download_csv(request, **kwargs):
     # Create the HttpResponse object with the appropriate CSV header.
     document = get_object_or_404(Document, slug=kwargs.get('slug'))

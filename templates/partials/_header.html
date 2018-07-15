@@ -74,6 +74,20 @@
                 </div>
             </form>
             {% endcomment %}
+            <div class="dropdown show">
+                <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user-circle"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {% if request.user.is_authenticated %}
+                        <a class="dropdown-item" href="{% url 'logout' %}"> <i class="fa fa-sign-out-alt"></i>
+                            Logout</a>
+                    {% else %}
+                        <a class="dropdown-item" href="{% url 'login' %}"> <i class="fa fa-sign-in-alt"></i> Login</a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </nav>

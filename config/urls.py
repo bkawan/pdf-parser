@@ -16,16 +16,19 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path, include
 
 from .api import urls as api_urls
-
-
 
 admin.site.site_header = settings.ADMIN_SITE_HEADER
 admin.site.site_title = settings.ADMIN_SITE_TITLE
 admin.site.index_title = settings.ADMIN_SITE_INDEX_TITLE
 urlpatterns = [
+                  # path('login/', auth_views.login, name='login'),
+                  # path('logout/', auth_views.logout, name='logout'),
+                  path('accounts/login/', auth_views.login, {'template_name':'core/login.html'}, name='login'),
+                  path('accounts/logout/', auth_views.logout, {'template_name':'core/logout.html'}, name='logout'),
                   path('admin/', admin.site.urls),
                   path('document-parser/', include('apps.v1.document_parser.urls')),
                   path('', include('apps.v1.core.urls')),

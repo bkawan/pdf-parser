@@ -3,8 +3,11 @@
 import csv
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
 from ..document_parser.king_county_pdf_parser import clean_king_county_pdf_file
 from ..document_parser.models import Document
@@ -25,3 +28,10 @@ def download_csv(request, **kwargs):
     for row in rows:
         writer.writerow(row)
     return response
+
+
+class DocumentCreateView(LoginRequiredMixin, CreateView):
+    fields = ['file']
+    template_name = 'document_parser/document_upload.html'
+    model = Document
+    success_url = reverse_lazy('landing_page')

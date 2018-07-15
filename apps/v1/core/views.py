@@ -10,7 +10,6 @@ class LandingPageView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        documents = Document.objects.all()
+        documents = Document.objects.all().order_by('-created_at')
         ctx['documents'] = documents
-
         return ctx

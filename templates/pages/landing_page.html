@@ -2,11 +2,16 @@
 
 {% block master_content %}
 
-    <div class="container" id="app">
+    <div class="container py-2" id="app">
 
 
+        {% if not documents %}
+            <h1 class="alert alert-info">
+                Welcome To PDF parser . You do not have any files uploaded yet. Please Upload
+            </h1>
+
+        {% endif %}
         {% for document in documents %}
-
             <!--[[getValue('ksdf')]]-->
             <table class="table table-striped">
                 {% if forloop.counter == 1 %}

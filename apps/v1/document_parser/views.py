@@ -17,8 +17,9 @@ from ..document_parser.models import Document
 def download_csv(request, **kwargs):
     # Create the HttpResponse object with the appropriate CSV header.
     document = get_object_or_404(Document, slug=kwargs.get('slug'))
+    uploaded_at = document.created_at.strftime("%Y_%m_%d_%H_%M_%S_%f")
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = f'attachment; filename="{document.name}.csv"'
+    response['Content-Disposition'] = f'attachment; filename="{uploaded_at}-{document.name}.csv"'
     document_path = document.file.path
     data = clean_king_county_pdf_file(file_path=document_path)
     writer = csv.writer(response)

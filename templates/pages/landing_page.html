@@ -1,4 +1,5 @@
 {% extends '_base_master.html' %}
+{% load tz %}
 
 {% block master_content %}
 
@@ -28,6 +29,7 @@
                 <tr>
                     <th scope="row" style="width: 3%">{{ forloop.counter }}</th>
                     <td style="width: 60%">{{ document.name }}</td>
+                    {#                    <td style="width: 15%" class="small">{{ document.created_at|timezone:'Asia/Kathmandu' }}</td>#}
                     <td style="width: 15%" class="small">{{ document.created_at }}</td>
                     <td style="width:15%;">
                         <button class="btn btn-sm btn-success show-detail"

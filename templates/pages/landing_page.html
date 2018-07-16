@@ -14,7 +14,7 @@
             </h1>
 
         {% endif %}
-        {% get_document_upload_form %}
+{#        {% get_document_upload_form %}#}
         {% for document in documents %}
             <!--[[getValue('ksdf')]]-->
             <table class="table table-striped">
@@ -101,6 +101,5 @@
         });
 
     </script>
-    <script src="{% static 'js/document_upload.js' %}"></script>
-    <script src="{% static 'document_parser/js/scripts.js' %}"></script>
+    <script src="{% static 'document_parser/js/document_upload.js' %}"></script>
 {% endblock %}

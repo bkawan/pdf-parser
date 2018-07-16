@@ -158,4 +158,4 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 TIME_ZONE = 'Asia/Kathmandu'
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/document-parser/upload/"

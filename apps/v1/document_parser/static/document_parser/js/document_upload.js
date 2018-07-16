@@ -18,7 +18,10 @@ $(function () {
     var documentUploadForm = $('#document-upload-form');
     documentUploadForm.submit(function (event) {
         event.preventDefault();
+        var data = new FormData($('form').get(0));
         var formData = $(this).serializeArray();
+        console.log(data)
+        console.log(formData)
         var url = $(this).attr('data-action-url');
         $.ajax({
             type: 'POST',
@@ -38,8 +41,10 @@ $(function () {
     //This function handles the error on Ajax  post
     // needs to display error for all the field  nicely
     function handleFormError(data, textStatus, errorThrown) {
+        console.log("*****************")
+        console.log(data)
         console.log('error')
-
+        console.log(data.response)
         for (var i = 0; i < inputs.length; i++) {
             if (data.responseJSON.hasOwnProperty(inputs[i])) {
                 var error = eval("data.responseJSON." + inputs[i] + "[0]");

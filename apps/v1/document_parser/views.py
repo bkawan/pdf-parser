@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
 from apps.v1.core.mixins import AjaxableResponseMixin
+from apps.v1.document_parser.forms import DocumentUploadForm
 from ..document_parser.king_county_pdf_parser import clean_king_county_pdf_file
 from ..document_parser.models import Document
 
@@ -33,7 +34,7 @@ def download_csv(request, **kwargs):
 
 
 class DocumentCreateView(LoginRequiredMixin, AjaxableResponseMixin, CreateView):
-    fields = ['file']
+    form_class = DocumentUploadForm
     template_name = 'document_parser/document_upload.html'
     model = Document
     success_url = reverse_lazy('landing_page')

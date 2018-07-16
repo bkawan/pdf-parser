@@ -17,8 +17,11 @@ class LandingPageView(LoginRequiredMixin, TemplateView):
         if total_documents > 3:
             unwanted_docs = documents[3:]
             for doc in unwanted_docs:
-                if os.path.isfile(doc.file.path):
-                    os.remove(doc.file.path)
-                    doc.delete()
+                try:
+                    if os.path.isfile(doc.file.path):
+                        os.remove(doc.file.path)
+                except:
+                    print('Some error')
+                doc.delete()
         ctx['documents'] = documents
         return ctx

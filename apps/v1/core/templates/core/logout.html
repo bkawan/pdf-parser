@@ -1,0 +1,11 @@
+{% extends '_base_master.html' %}
+
+
+{% block master_content %}
+    <div class="container py-2">
+        <p class="alert alert-info">Successfully Logged out
+            <br>
+            <a href="{% url 'login' %}"><i class="fa fa-sign-in-alt"></i> Login Again</a>
+        </p>
+    </div>
+{% endblock %}

@@ -1,3 +1,4 @@
+import datetime
 import re
 
 from .pdf_parser import PdfParser
@@ -59,10 +60,15 @@ def clean_king_county_pdf_file(file_path, pages=None):
     raw_text = parser.convert_pdf_to_text(pages=pages)
     all_rows = re.split(r'((?:18|19|20)-[\d-]+)', raw_text)
     case_status_date_row = re.findall(r'\d{1,2}\.\d{1,2}\.\d{4}', all_rows[0])
+    if not case_status_date_row:
+        case_status_date_row = re.findall(r'\d{1,2}\.\d{1,2}', all_rows[0])
+        if case_status_date_row:
+            case_status_date_row = case_status_date_row[0] + "." + str(datetime.date.today().year)
+            case_status_date_row = [case_status_date_row]
     if case_status_date_row:
         data['case_status_date'] = case_status_date_row[0]
     else:
-        data['case_status_date'] = ''
+        data['case_status_date'] = datetime.date.today().strftime('%m.%d.%Y')
     all_rows = all_rows[1:]
     keys = []
     values = []

@@ -8,13 +8,18 @@
     <div class="container py-2" id="app">
 
 
-        {% if not documents %}
+        {% if not file_not_found and not documents %}
             <h1 class="alert alert-info">
                 Welcome To PDF parser . You do not have any files uploaded yet. Please Upload
             </h1>
 
         {% endif %}
-{#        {% get_document_upload_form %}#}
+        {% if file_not_found %}
+            <h3 class="alert alert-info">
+                {{ file_not_found }}
+            </h3>
+        {% endif %}
+        {#        {% get_document_upload_form %}#}
         {% for document in documents %}
             <!--[[getValue('ksdf')]]-->
             <table class="table table-striped">

@@ -1,11 +1,12 @@
 # Create your views here.
 
 import csv
+import os
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
@@ -23,6 +24,9 @@ def download_csv(request, **kwargs):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = f'attachment; filename="{uploaded_at}-{document.name}.csv"'
     document_path = document.file.path
+    if not os.path.isfile(document_path):
+        return render(request, 'pages/landing_page.html',
+                      {'file_not_found':'There is no  file. Please upload the file and try again'})
     data = clean_king_county_pdf_file(file_path=document_path)
     writer = csv.writer(response)
     first_row = list(data['case_list'][0].keys()) + ['case_status_date']

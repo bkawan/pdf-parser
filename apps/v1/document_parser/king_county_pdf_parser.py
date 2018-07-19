@@ -50,7 +50,7 @@ def clean_king_county_pdf_file_old(file_path, pages=None):
 
 
 def clean_king_county_pdf_file(file_path, pages=None):
-    cols = ['DEF01', 'DEF02', 'PLA01', 'PLA02', 'DEC01', 'PET01', 'RSP01', 'AY01']
+    cols = ['DEF01', 'DEF02', 'PLA01', 'PLA02', 'DEC01', 'PET01', 'RSP01', 'ATY01']
     data = {
         'case_status_date':'',
         'case_list':[]

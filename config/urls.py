@@ -29,7 +29,7 @@ urlpatterns = [
                   # path('logout/', auth_views.logout, name='logout'),
                   path('accounts/login/', auth_views.login, {'template_name':'core/login.html'}, name='login'),
                   path('accounts/logout/', auth_views.logout, {'template_name':'core/logout.html'}, name='logout'),
-                  path('admin/', admin.site.urls),
+                  path(settings.DJANGO_ADMIN_URL, admin.site.urls),
                   path('document-parser/', include('apps.v1.document_parser.urls')),
                   path('', include('apps.v1.core.urls')),
 

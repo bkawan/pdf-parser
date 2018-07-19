@@ -112,3 +112,5 @@ jupyter-notebook
 templates/pages/landing_page_vue.html
 
 .DS_Store
+
+config/settings/env.py

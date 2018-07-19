@@ -25,7 +25,9 @@ def download_csv(request, **kwargs):
     document_path = document.file.path
     data = clean_king_county_pdf_file(file_path=document_path)
     writer = csv.writer(response)
-    writer.writerow(list(data['case_list'][0].keys()) + ['case_status_date'])
+    first_row = list(data['case_list'][0].keys()) + ['case_status_date']
+    first_row = [x.replace('0', "_0") if x == "DEC01" else x for x in first_row]
+    writer.writerow(first_row)
     data['case_status_date'] = document.document_created_at.strftime('%m/%d/%Y')
     rows = [list(d.values()) + [data['case_status_date']] for d in data['case_list']]
     for row in rows:

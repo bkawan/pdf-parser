@@ -48,7 +48,13 @@
                 </tr>
                 </tbody>
             </table>
-            <div class="card no-display text-center"
+            <div class="card no-display text-center my-1"
+                 id="error-document-not-found-{{ document.slug }}">
+                <div class="card-body">
+                    <h6 class="card-title text-danger"></h6>
+                </div>
+            </div>
+            <div class="card no-display text-center my-1"
                  id="loading-data-image-{{ document.slug }}">
                 <img src="{% static 'images/loading-text.gif' %}"
                      alt="loading data"
@@ -84,10 +90,12 @@
                 let apiUrl = `/api/v1/document-parser/document/${slug}/`;
                 let table = $(`#${slug}`);
                 let button = $(this);
+                let errorEl = $('#error-document-not-found-' + slug);
                 if (table.hasClass('no-display')) {
                     $.ajax({
                         url: apiUrl,
                         success: function (data) {
+                            errorEl.hide();
                             let caseList = data.data.case_list;
                             let caseStatusDate = data.data.case_status_date;
                             table.removeClass('no-display');
@@ -103,6 +111,11 @@
                                 tr.append(`<td>${fileDate}</td>`);
                                 tr.append(`<td>${caseStatusDate}</td>`);
                             }
+                        },
+                        error: function (error) {
+                            errorEl.show();
+                            errorEl.children('.card-body').children('.text-danger').html(error.responseJSON.detail)
+
                         },
                         beforeSend: function () {
                             $('#loading-data-image-' + slug).show();

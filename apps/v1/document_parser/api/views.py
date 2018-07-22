@@ -1,3 +1,7 @@
+import os
+
+from django.utils import timezone
+from rest_framework.exceptions import NotFound
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -13,9 +17,10 @@ class KingCountyPdfParseAPIView(APIView):
         """
         document = get_object_or_404(Document, slug=kwargs.get('slug'))
         document_path = document.file.path
+        if not os.path.isfile(document_path):
+            raise NotFound(f"The request file not found or delete from the server located at {document.file}")
+
         data = clean_king_county_pdf_file(file_path=document_path)
-        data['case_status_date'] = document.document_created_at.strftime('%m/%d/%Y')
+        data['case_status_date'] = timezone.localtime(document.created_at).strftime('%m/%d/%Y')
 
         return Response({'data':data})
-
-

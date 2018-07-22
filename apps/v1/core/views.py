@@ -23,5 +23,17 @@ class LandingPageView(LoginRequiredMixin, TemplateView):
                 except:
                     print('Some error')
                 doc.delete()
-        ctx['documents'] = documents
+        wanted_docs = documents[:3]
+        final_docs = []
+        for doc in wanted_docs:
+            try:
+                # Check if file exist and it not exist delete object as well
+                if not os.path.isfile(doc.file.path):
+                    doc.delete()
+                else:
+                    final_docs.append(doc)
+            except:
+                print('Some Error')
+
+        ctx['documents'] = final_docs
         return ctx

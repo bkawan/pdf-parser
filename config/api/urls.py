@@ -15,13 +15,7 @@ Including another URLconf
 """
 from django.urls import path, include
 
-from apps.v1.users.api.views import CustomObtainAuthToken, UserSignupView
-
 urlpatterns = [
-    path('api/v1/users/', include('apps.v1.users.api.urls')),
-    path('api/v1/auth/login/', CustomObtainAuthToken.as_view()),
-    path('api/v1/auth/signup/', UserSignupView.as_view()),
-    path('api/v1/media-library/', include('apps.v1.media_library.api.urls')),
     path('api/v1/document-parser/', include('apps.v1.document_parser.api.urls')),
 
 ]

@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views.generic import CreateView
 
 from apps.v1.core.mixins import AjaxableResponseMixin
@@ -20,7 +21,7 @@ from ..document_parser.models import Document
 def download_csv(request, **kwargs):
     # Create the HttpResponse object with the appropriate CSV header.
     document = get_object_or_404(Document, slug=kwargs.get('slug'))
-    uploaded_at = document.created_at.strftime("%Y_%m_%d_%H_%M_%S_%f")
+    uploaded_at = timezone.localtime(document.created_at).strftime("%Y_%m_%d_%H_%M_%S_%f")
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = f'attachment; filename="{uploaded_at}-{document.name}.csv"'
     document_path = document.file.path

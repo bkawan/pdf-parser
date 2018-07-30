@@ -25,8 +25,6 @@ admin.site.site_header = settings.ADMIN_SITE_HEADER
 admin.site.site_title = settings.ADMIN_SITE_TITLE
 admin.site.index_title = settings.ADMIN_SITE_INDEX_TITLE
 urlpatterns = [
-                  # path('login/', auth_views.login, name='login'),
-                  # path('logout/', auth_views.logout, name='logout'),
                   path('accounts/login/', auth_views.login, {'template_name':'core/login.html'}, name='login'),
                   path('accounts/logout/', auth_views.logout, {'template_name':'core/logout.html'}, name='logout'),
                   path(settings.DJANGO_ADMIN_URL, admin.site.urls),

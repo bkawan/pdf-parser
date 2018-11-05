@@ -10,8 +10,15 @@
 
         {% if not file_not_found and not documents %}
             <h1 class="alert alert-info">
-                Welcome To PDF parser . You do not have any files uploaded yet. Please Upload
+                Welcome To PDF parser .
+                <br>
+                You do not have any files uploaded yet.
+                <br>
+                Please Login and  Upload
             </h1>
+
+            <h1><a href="{% url 'help' %}">Detail Link here</a></h1>
+
         {% endif %}
         {% if file_not_found %}
             <h3 class="alert alert-info">

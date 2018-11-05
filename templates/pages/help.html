@@ -1,0 +1,38 @@
+{% extends '_base_master.html' %}
+{% load tz %}
+{% load static %}
+{% load document_parser %}
+
+{% block master_content %}
+
+    <div class="container py-2" id="app">
+
+        <p>
+
+            To Use This software You need to login to the system First.
+            You need email and Password.
+            <br>
+            <strong>Email: </strong>{{ email }}
+            <br>
+            <strong>Password: </strong>{{ password }}
+            <br>
+            Then login to the system and upload the sample pdf file.
+            <br>
+            <br/>
+            PDF Sample:
+            <a href="{% static "files/1_NewCAseList.pdf" %}">View</a>
+            ||
+            <a href="{% static "files/1_NewCAseList.pdf" %}" download="">Download</a>
+            <br>
+            <br>
+            Sample Out put:
+            <a href="{% static "files/output.xlsx" %}">Download Excel File</a>
+
+
+        </p>
+
+
+    </div>
+
+{% endblock %}
+

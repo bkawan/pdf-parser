@@ -157,3 +157,6 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 LOGIN_REDIRECT_URL = "/document-parser/upload/"
+
+TESTING_EMAIL = 'user@gmail.com'
+TESTING_PASSWORD = 'testuser'

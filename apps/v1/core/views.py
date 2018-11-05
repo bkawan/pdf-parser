@@ -1,6 +1,7 @@
 # Create your views here.
 import os
 
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 
@@ -36,4 +37,14 @@ class LandingPageView(LoginRequiredMixin, TemplateView):
                 print('Some Error')
 
         ctx['documents'] = final_docs
+        return ctx
+
+
+class HelpPageView(TemplateView):
+    template_name = 'pages/help.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["email"] = settings.TESTING_EMAIL
+        ctx["password"] = settings.TESTING_PASSWORD
         return ctx
